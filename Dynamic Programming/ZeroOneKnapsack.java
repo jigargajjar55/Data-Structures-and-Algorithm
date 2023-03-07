@@ -1,7 +1,6 @@
-import java.util.* ;
-import java.io.*; 
+ 
 
-public class Solution{
+class Solution{
 
     static int solveByRecursion(int[] weight, int[] value, int index, int capacity) {
 
