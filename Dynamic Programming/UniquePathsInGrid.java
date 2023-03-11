@@ -55,15 +55,15 @@ public class UniquePathsInGrid {
                     dp[row][col] = 1;
                 } else {
                     int up = 0;
-                    int down = 0;
+                    int left = 0;
 
                     if (row > 0) {
                         up = dp[row - 1][col];
                     }
                     if (col > 0) {
-                        down = dp[row][col - 1];
+                        left = dp[row][col - 1];
                     }
-                    dp[row][col] = up + down;
+                    dp[row][col] = up + left;
                 }
             }
 
@@ -85,15 +85,15 @@ public class UniquePathsInGrid {
                     curr[col] = 1;
                 } else {
                     int up = 0;
-                    int down = 0;
+                    int left = 0;
 
                     if (row > 0) {
                         up = prev[col];
                     }
                     if (col > 0) {
-                        down = curr[col - 1];
+                        left = curr[col - 1];
                     }
-                    curr[col] = up + down;
+                    curr[col] = up + left;
                 }
             }
 
