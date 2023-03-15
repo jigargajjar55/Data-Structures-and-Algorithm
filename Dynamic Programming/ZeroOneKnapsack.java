@@ -1,154 +1,158 @@
- 
+class ZeroOneKnapsack {
 
-class Solution{
-
-    static int solveByRecursion(int[] weight, int[] value, int index, int capacity) {
-
-        //Base condition
-        if(index == 0){
-            if(weight[index] <= capacity){
-                return value[index];
-            }else{
+    // Time : O(2 ^ N), Space: O(N) {N: Array Length for Recursive Stack Space}
+    static int solveByRecursion(int index, int[] wt, int[] val, int capacity) {
+        // Base case
+        if (index == 0) {
+            if (wt[index] <= capacity) {
+                return val[index];
+            } else {
                 return 0;
             }
-        }
-
-        int include = 0;
-
-        if(weight[index] <= capacity){
-            include = value[index] + solveByRecursion(weight,value,index-1,capacity-weight[index]);
 
         }
 
-        int exclude = solveByRecursion(weight,value,index-1,capacity);
+        int exclude = solveByRecursion(index - 1, wt, val, capacity);
+        int include = -(int) (1e9);
 
-        int ans = Math.max(include,exclude);
+        if (wt[index] <= capacity) {
+            include = val[index] + solveByRecursion(index - 1, wt, val, capacity - wt[index]);
+        }
+
+        int ans = Math.max(exclude, include);
 
         return ans;
 
-
     }
 
-     static int solveByMem(int[] weight, int[] value, int index, int capacity,int[][] dp) {
-
-        //Base condition
-        if(index == 0){
-            if(weight[index] <= capacity){
-                return value[index];
-            }else{
-                return 0;
+    // Time : O(N * Capacity), Space: O(N) + O(N * Capacity) {N: Array Length for
+    // Recursive Stack Space, 2D DP Array}
+    static int solveByTopDownDP(int index, int[] wt, int[] val, int capacity, int[][] dp) {
+        // Base case
+        if (index == 0) {
+            if (wt[index] <= capacity) {
+                return dp[index][capacity] = val[index];
+            } else {
+                return dp[index][capacity] = 0;
             }
+
         }
 
-        if(dp[index][capacity] != -1){
+        // Overlapping sub-problem
+        if (dp[index][capacity] != -1) {
             return dp[index][capacity];
         }
 
-        int include = 0;
+        int exclude = solveByTopDownDP(index - 1, wt, val, capacity, dp);
+        int include = -(int) (1e9);
 
-        if(weight[index] <= capacity){
-            include = value[index] + solveByMem(weight,value,index-1,capacity-weight[index],dp);
-
+        if (wt[index] <= capacity) {
+            include = val[index] + solveByTopDownDP(index - 1, wt, val, capacity - wt[index], dp);
         }
 
-        int exclude = solveByMem(weight,value,index-1,capacity,dp);
-
-        dp[index][capacity] = Math.max(include,exclude);
+        dp[index][capacity] = Math.max(exclude, include);
 
         return dp[index][capacity];
 
     }
 
-     static int solveByTab(int[] weight, int[] value, int n, int capacity) {
+    // Time : O(N * Capacity), Space: O(N * Capacity) {2D DP Array}
+    static int solveByBottomUpDP(int n, int[] wt, int[] val, int capacity) {
 
-        //Step1 : Create a DP Array
-        int[][] dp = new int[n][capacity+1];
-
-        //Step2 : Analyse Base case and add it in DP Array
-        for(int w=weight[0]; w<=capacity; w++){
-            if(weight[0] <= capacity){
-                dp[0][w] = value[0];
-            }else{
-                dp[0][w] = 0;
-            }
+        int[][] dp = new int[n][capacity + 1];
+        for (int weight = wt[0]; weight <= capacity; weight++) {
+            dp[0][weight] = val[0];
         }
 
-        for(int index=1;index<n; index++){
-            for(int w=0; w<=capacity; w++){
+        for (int index = 1; index < n; index++) {
+            for (int cap = 0; cap <= capacity; cap++) {
 
-                int include = 0;
+                int exclude = dp[index - 1][cap];
+                int include = -(int) (1e9);
 
-                if(weight[index] <= w){
-                    include = value[index] + dp[index-1][w-weight[index]];
-
+                if (wt[index] <= cap) {
+                    include = val[index] + dp[index - 1][cap - wt[index]];
                 }
 
-                int exclude = dp[index-1][w];
-
-                dp[index][w] = Math.max(include,exclude);
-
+                dp[index][cap] = Math.max(exclude, include);
             }
         }
-        return dp[n-1][capacity];
+
+        return dp[n - 1][capacity];
 
     }
 
+    // Time : O(N * Capacity), Space: O(2 * Capacity) {Couple of 1D DP Array}
+    static int solveBySpaceOptimise(int n, int[] wt, int[] val, int capacity) {
 
-     static int solveByTabSpaceOptmize(int[] weight, int[] value, int n, int capacity) {
-
-        //Step1 : Create a DP Array
-       // int[][] dp = new int[n][capacity+1];
-         
-      
-        int[] curr = new int[capacity+1];
-
-        //Step2 : Analyse Base case and add it in DP Array
-        for(int w=weight[0]; w<=capacity; w++){
-            if(weight[0] <= capacity){
-                curr[w] = value[0];
-            }else{
-                curr[w] = 0;
-            }
+        int[] prev = new int[capacity + 1];
+        for (int weight = wt[0]; weight <= capacity; weight++) {
+            prev[weight] = val[0];
         }
 
-        for(int index=1;index<n; index++){
-            for(int w=capacity; w>=0; w--){
+        for (int index = 1; index < n; index++) {
+            int[] curr = new int[capacity + 1];
+            for (int cap = 0; cap <= capacity; cap++) {
 
-                int include = 0;
+                int exclude = prev[cap];
+                int include = -(int) (1e9);
 
-                if(weight[index] <= w){
-                    include = value[index] + curr[w-weight[index]];
-
+                if (wt[index] <= cap) {
+                    include = val[index] + prev[cap - wt[index]];
                 }
 
-                int exclude = curr[w];
-
-                curr[w] = Math.max(include,exclude);
-
+                curr[cap] = Math.max(exclude, include);
             }
+            prev = curr;
         }
-        return curr[capacity];
+
+        return prev[capacity];
 
     }
 
-    
-    static int knapsack(int[] weight, int[] value, int n, int maxWeight) {
+    // Time : O(N * Capacity), Space: O(Capacity) {1D DP Array}
+    static int solveBySpaceOptimiseMore(int n, int[] wt, int[] val, int capacity) {
 
-        //return solveByRecursion(weight,value,n-1,maxWeight);
-        
-        // int[][] dp = new int[n][maxWeight+1];
-        // for(int i=0; i<n; i++){
-        //     for(int j=0; j<=maxWeight; j++){
-        //         dp[i][j] = -1;
-        //     }
+        int[] prev = new int[capacity + 1];
+        for (int weight = wt[0]; weight <= capacity; weight++) {
+            prev[weight] = val[0];
+        }
+
+        for (int index = 1; index < n; index++) {
+
+            // From Right to Left, because it depends on previous row left side elements
+            for (int cap = capacity; cap >= 0; cap--) {
+
+                int exclude = prev[cap];
+                int include = -(int) (1e9);
+
+                if (wt[index] <= cap) {
+                    include = val[index] + prev[cap - wt[index]];
+                }
+
+                prev[cap] = Math.max(exclude, include);
+            }
+
+        }
+
+        return prev[capacity];
+
+    }
+
+    // Function to return max value that can be put in knapsack of capacity W.
+    static int knapSack(int W, int wt[], int val[], int n) {
+        // return solveByRecursion(n-1,wt,val,W);
+
+        // int[][] dp = new int[n][W+1];
+        // for(int[] row : dp){
+        // Arrays.fill(row,-1);
         // }
+        // return solveByTopDownDP(n-1,wt,val,W,dp);
 
-        // return solveByMem(weight,value,n-1,maxWeight,dp);
-           
+        // return solveByBottomUpDP(n,wt,val,W);
 
-        //   return solveByTab(weight,value,n,maxWeight);
+        // return solveBySpaceOptimise(n,wt,val,W);
 
-           return solveByTabSpaceOptmize(weight,value,n,maxWeight);
-
+        return solveBySpaceOptimiseMore(n, wt, val, W);
     }
 }
