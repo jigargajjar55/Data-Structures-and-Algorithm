@@ -35,7 +35,9 @@ public class NumberOfWaysToEarnPoints {
 
     }
 
-    // Time : O(N * Target), Space: O(Target) + O(N * Target) {Aux. Stack Space and
+    // Time : O(N * Target * N) ~ O( (N ^ 2) * Target), Space: O(Target) + O(N *
+    // Target) {Aux. Stack Space
+    // and
     // 2D DP Array}
     private int solveByTopDownDP(int index, int target, int n, int[][] types, int[][] dp) {
 
@@ -72,7 +74,8 @@ public class NumberOfWaysToEarnPoints {
 
     }
 
-    // Time : O(N * Target), Space: O(N * Target) {2D DP Array}
+    // Time : O(N * Target * N) ~ O( (N ^ 2) * Target), Space: O(N * Target) {2D DP
+    // Array}
     private int solveByBottomUpDP(int n, int target, int[][] types) {
 
         int[][] dp = new int[n + 1][target + 1];
@@ -106,7 +109,8 @@ public class NumberOfWaysToEarnPoints {
         return dp[0][target];
     }
 
-    // Time : O(N * Target), Space: O(2 * Target) {1D DP Array}
+    // Time : O(N * Target) ~ O( (N ^ 2) * Target), Space: O(2 * Target) {1D DP
+    // Array}
     private int solveBySpaceOptimise(int n, int target, int[][] types) {
 
         int[] ahead = new int[target + 1];
