@@ -1,21 +1,21 @@
 package LinkedList;
 
+class Node {
+    int data;
+    Node prev;
+    Node next;
+
+    Node(int d) {
+        this.data = d;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
 public class DoublyLinkedList {
 
     Node head;
     Node tail;
-
-    public class Node {
-        int data;
-        Node prev;
-        Node next;
-
-        Node(int d) {
-            this.data = d;
-            this.prev = null;
-            this.next = null;
-        }
-    }
 
     public void insertAtHead(int d) {
 

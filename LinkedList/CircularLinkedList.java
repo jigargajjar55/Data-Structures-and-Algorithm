@@ -2,7 +2,7 @@ package LinkedList;
 
 import java.util.*;
 
-public class CircularDoublyLinkedList {
+public class CircularLinkedList {
 
     Node tail;
 
@@ -132,7 +132,7 @@ public class CircularDoublyLinkedList {
 
     public static void main(String[] args) {
 
-        CircularDoublyLinkedList cdl = new CircularDoublyLinkedList();
+        CircularLinkedList cdl = new CircularLinkedList();
 
         // cdl.insertNode(0,10);
         // cdl.insertNode(10,20);
