@@ -1,18 +1,18 @@
 import java.util.*;
 
-public class LearnTree {
+class Node {
+    int data;
+    Node left;
+    Node right;
 
-    public static class Node {
-        int data;
-        Node left;
-        Node right;
-
-        Node(int d) {
-            this.data = d;
-            this.left = null;
-            this.right = null;
-        }
+    Node(int d) {
+        this.data = d;
+        this.left = null;
+        this.right = null;
     }
+}
+
+public class LearnTree {
 
     public static Node buildTree(Node root) {
 
@@ -33,6 +33,39 @@ public class LearnTree {
 
         return root;
 
+    }
+
+    public static Node buildTreeFromLevelOrder(Node root) {
+        Queue<Node> q = new LinkedList<>();
+
+        System.out.println("Enter the data for root: ");
+        Scanner sc = new Scanner(System.in);
+        int data = sc.nextInt();
+        root = new Node(data);
+
+        q.offer(root);
+
+        while (!q.isEmpty()) {
+            Node temp = q.peek();
+            q.poll();
+
+            System.out.println("Enter left node for: " + temp.data);
+            int leftData = sc.nextInt();
+
+            if (leftData != -1) {
+                temp.left = new Node(leftData);
+                q.offer(temp.left);
+            }
+
+            System.out.println("Enter right node for: " + temp.data);
+            int rightData = sc.nextInt();
+
+            if (rightData != -1) {
+                temp.right = new Node(rightData);
+                q.offer(temp.right);
+            }
+        }
+        return root;
     }
 
     public static void levelOrder(Node root) {
@@ -165,43 +198,6 @@ public class LearnTree {
         System.out.print(root.data + "  ");
     }
 
-    public static void morrisTraversal(Node root) {
-        // base case
-        if (root == null) {
-            return;
-        }
-
-        Node current = root;
-
-        while (current != null) {
-
-            if (current.left == null) {
-                System.out.print(current.data + "  ");
-                current = current.right;
-            } else {
-                Node predecessor = findPre(current);
-                if (predecessor.right == null) {
-                    predecessor.right = current;
-                    current = current.left;
-                } else {
-                    predecessor.right = null;
-                    System.out.print(current.data + "  ");
-                    current = current.right;
-                }
-            }
-        }
-    }
-
-    public static Node findPre(Node root) {
-
-        Node temp = root.left;
-
-        while (temp.right != null && temp.right != root) {
-            temp = temp.right;
-        }
-        return temp;
-    }
-
     public static void inorderIterative(Node root) {
         Stack<Node> st = new Stack<>();
 
@@ -273,37 +269,41 @@ public class LearnTree {
 
     }
 
-    public static Node buildTreeFromLevelOrder(Node root) {
-        Queue<Node> q = new LinkedList<>();
+    public static void morrisTraversal(Node root) {
+        // base case
+        if (root == null) {
+            return;
+        }
 
-        System.out.println("Enter the data for root: ");
-        Scanner sc = new Scanner(System.in);
-        int data = sc.nextInt();
-        root = new Node(data);
+        Node current = root;
 
-        q.offer(root);
+        while (current != null) {
 
-        while (!q.isEmpty()) {
-            Node temp = q.peek();
-            q.poll();
-
-            System.out.println("Enter left node for: " + temp.data);
-            int leftData = sc.nextInt();
-
-            if (leftData != -1) {
-                temp.left = new Node(leftData);
-                q.offer(temp.left);
-            }
-
-            System.out.println("Enter right node for: " + temp.data);
-            int rightData = sc.nextInt();
-
-            if (rightData != -1) {
-                temp.right = new Node(rightData);
-                q.offer(temp.right);
+            if (current.left == null) {
+                System.out.print(current.data + "  ");
+                current = current.right;
+            } else {
+                Node predecessor = findPre(current);
+                if (predecessor.right == null) {
+                    predecessor.right = current;
+                    current = current.left;
+                } else {
+                    predecessor.right = null;
+                    System.out.print(current.data + "  ");
+                    current = current.right;
+                }
             }
         }
-        return root;
+    }
+
+    public static Node findPre(Node root) {
+
+        Node temp = root.left;
+
+        while (temp.right != null && temp.right != root) {
+            temp = temp.right;
+        }
+        return temp;
     }
 
     public static void main(String[] args) {
