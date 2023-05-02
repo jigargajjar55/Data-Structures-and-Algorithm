@@ -6,17 +6,9 @@ class TrieNode {
     boolean isTerminal;
 
     TrieNode(char data) {
-
         this.data = data;
         children = new TrieNode[26];
-        /*
-         * for(int i=0; i<26; i++) {
-         * children[i] = null;
-         * }
-         */
-
         isTerminal = false;
-
     }
 }
 
@@ -141,9 +133,9 @@ public class LearnTrie {
 
         System.out.println("Word is present or not: " + t.searchWord("TIME"));
 
-        t.removeWord("JIGAR");
+        t.removeWord("ARM");
 
-        System.out.println("Word is present or not: " + t.searchWord("JIGAR"));
+        System.out.println("Word is present or not: " + t.searchWord("ARM"));
 
     }
 
