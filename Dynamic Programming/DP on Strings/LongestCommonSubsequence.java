@@ -43,12 +43,13 @@ public class LongestCommonSubsequence {
     private int solveByBottomUpDP(int n, int m, String text1, String text2) {
 
         int[][] dp = new int[n + 1][m + 1];
-        for (int i = 0; i <= n; i++) {
-            dp[i][0] = 0;
-        }
-        for (int j = 0; j <= m; j++) {
-            dp[0][j] = 0;
-        }
+        // Analyze the base case
+        // for (int i = 0; i <= n; i++) {
+        // dp[i][0] = 0;
+        // }
+        // for (int j = 0; j <= m; j++) {
+        // dp[0][j] = 0;
+        // }
 
         for (int index1 = 1; index1 <= n; index1++) {
             for (int index2 = 1; index2 <= m; index2++) {
@@ -72,9 +73,9 @@ public class LongestCommonSubsequence {
 
         int[] prev = new int[m + 1];
 
-        for (int j = 0; j <= m; j++) {
-            prev[j] = 0;
-        }
+        // for (int j = 0; j <= m; j++) {
+        // prev[j] = 0;
+        // }
 
         for (int index1 = 1; index1 <= n; index1++) {
             int[] curr = new int[m + 1];
