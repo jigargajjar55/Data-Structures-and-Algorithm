@@ -10,11 +10,7 @@ public class UncrossedLinesLC1035 {
 
         int ans = 0;
         if (nums1[i] == nums2[j]) {
-            int exclude = solveByRecursion(i + 1, j, n, m, nums1, nums2);
-            int include = 1 + solveByRecursion(i + 1, j + 1, n, m, nums1, nums2);
-
-            ans = Math.max(exclude, include);
-
+            ans = 1 + solveByRecursion(i + 1, j + 1, n, m, nums1, nums2);
         } else {
             ans = Math.max(solveByRecursion(i + 1, j, n, m, nums1, nums2),
                     solveByRecursion(i, j + 1, n, m, nums1, nums2));
@@ -37,10 +33,8 @@ public class UncrossedLinesLC1035 {
         }
 
         if (nums1[i] == nums2[j]) {
-            int exclude = solveByTopDownDP(i + 1, j, n, m, nums1, nums2, dp);
-            int include = 1 + solveByTopDownDP(i + 1, j + 1, n, m, nums1, nums2, dp);
 
-            dp[i][j] = Math.max(exclude, include);
+            dp[i][j] = 1 + solveByTopDownDP(i + 1, j + 1, n, m, nums1, nums2, dp);
 
         } else {
             dp[i][j] = Math.max(solveByTopDownDP(i + 1, j, n, m, nums1, nums2, dp),
@@ -48,7 +42,6 @@ public class UncrossedLinesLC1035 {
         }
 
         return dp[i][j];
-
     }
 
     // Time: O(M * N), Space: O(M * N){2D DP Array}
@@ -60,10 +53,8 @@ public class UncrossedLinesLC1035 {
             for (int j = m - 1; j >= 0; j--) {
 
                 if (nums1[i] == nums2[j]) {
-                    int exclude = dp[i + 1][j];
-                    int include = 1 + dp[i + 1][j + 1];
 
-                    dp[i][j] = Math.max(exclude, include);
+                    dp[i][j] = 1 + dp[i + 1][j + 1];
 
                 } else {
                     dp[i][j] = Math.max(dp[i + 1][j], dp[i][j + 1]);
@@ -87,10 +78,7 @@ public class UncrossedLinesLC1035 {
             for (int j = m - 1; j >= 0; j--) {
 
                 if (nums1[i] == nums2[j]) {
-                    int exclude = ahead[j];
-                    int include = 1 + ahead[j + 1];
-
-                    curr[j] = Math.max(exclude, include);
+                    curr[j] = 1 + ahead[j + 1];
 
                 } else {
                     curr[j] = Math.max(ahead[j], curr[j + 1]);

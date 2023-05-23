@@ -1,4 +1,4 @@
-public class LC44_WildCardMatching {
+public class WildCardMatchingLC44 {
 
     // Time: Exponential, Space: O(N + M){aux. Stack Space, N: length of p string,
     // M: length of s string}
