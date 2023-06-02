@@ -40,20 +40,20 @@ public class StoneGame3LC1406 {
     public String stoneGameIII(int[] stoneValue) {
 
         int n = stoneValue.length;
-        int total = 0;
+        int totalValue = 0;
         for (int stone : stoneValue) {
-            total += stone;
+            totalValue += stone;
         }
         int[][] dp = new int[n][2];
         for (int[] row : dp) {
             Arrays.fill(row, -1);
         }
 
-        int alice = solveByTopDownDP(0, 1, n, stoneValue, dp);
+        int aliceValue = solveByTopDownDP(0, 1, n, stoneValue, dp);
 
-        if (total - alice < alice) {
+        if (totalValue - aliceValue < aliceValue) {
             return "Alice";
-        } else if (total - alice > alice) {
+        } else if (totalValue - aliceValue > aliceValue) {
             return "Bob";
         } else {
             return "Tie";

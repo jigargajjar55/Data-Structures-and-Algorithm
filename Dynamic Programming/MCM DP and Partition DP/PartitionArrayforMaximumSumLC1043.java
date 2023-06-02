@@ -1,4 +1,4 @@
-public class PartitionArrayforMaximumSum {
+public class PartitionArrayforMaximumSumLC1043 {
 
     // Time : O(Exponential), Space: O(N){Aux. Stack Space}
     private int solveByRecursion(int index, int n, int k, int[] arr) {

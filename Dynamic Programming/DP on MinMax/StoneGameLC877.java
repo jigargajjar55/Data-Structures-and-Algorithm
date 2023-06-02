@@ -2,7 +2,7 @@ import java.util.*;
 
 public class StoneGameLC877 {
 
-    // Time: O(2 ^ N), Space: O(N) {Aux. stack space, N : Array length}
+    // Time: O(Exponential), Space: O(N) {Aux. stack space, N : Array length}
     private int solveByRecursion(int left, int right, boolean turn, int[] piles) {
 
         // Base Case

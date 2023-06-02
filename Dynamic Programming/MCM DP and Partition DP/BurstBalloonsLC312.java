@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class BurstBalloons {
+public class BurstBalloonsLC312 {
 
     // Time: O(Exponential), Space: O(N){Aux. Stack Space}
     private int solveByRecursion(int i, int j, ArrayList<Integer> list) {

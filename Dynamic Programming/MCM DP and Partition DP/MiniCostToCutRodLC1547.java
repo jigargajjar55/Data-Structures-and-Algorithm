@@ -1,6 +1,6 @@
 import java.util.*;
 
-class MiniCostToCutRod {
+class MiniCostToCutRodLC1547 {
 
     // Time : O(Exponential), Space: O(N){Aux. Stack Space}
     private int solveByRecursion(int i, int j, int[] cutsArray) {

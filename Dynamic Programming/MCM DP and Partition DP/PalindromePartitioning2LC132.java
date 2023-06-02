@@ -1,4 +1,4 @@
-public class PalindromePartitioning2 {
+public class PalindromePartitioning2LC132 {
 
     private boolean isPalindrome(int i, int j, String s) {
 
@@ -14,7 +14,7 @@ public class PalindromePartitioning2 {
 
     }
 
-    // Time : O(N ^ 3), Space: O(N){Aux. Stack Space}
+    // Time : O(Exponetial), Space: O(N){Aux. Stack Space}
     private int solveByRecursion(int i, int n, String s) {
 
         // Base case
