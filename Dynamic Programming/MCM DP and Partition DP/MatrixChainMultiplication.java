@@ -1,6 +1,7 @@
 
 public class MatrixChainMultiplication {
 
+    // Time: O(Exponential), Space: O(N){Aux. Stack space}
     static int solveByRecursion(int i, int j, int[] arr) {
         // Base Case
         if (i == j) {
@@ -20,12 +21,14 @@ public class MatrixChainMultiplication {
 
     }
 
+    // Time: O(N ^ 3), Space: O(N) + O(N ^ 2){Aux. Stack space and 2D DP array}
     static int solveByTopDownDP(int i, int j, int[] arr, int[][] dp) {
         // Base Case
         if (i == j) {
             return 0;
         }
 
+        // Overlapping subproblem
         if (dp[i][j] != -1) {
             return dp[i][j];
         }
@@ -44,6 +47,7 @@ public class MatrixChainMultiplication {
 
     }
 
+    // Time: O(N ^ 3), Space: O(N ^ 2){2D DP array}
     static int solveByBottomUpDP(int n, int[] arr) {
 
         int[][] dp = new int[n][n];
