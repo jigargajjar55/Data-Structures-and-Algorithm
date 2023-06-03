@@ -1,7 +1,7 @@
 
 import java.util.*;
 
-public class SumofDistancesLC_2615 {
+public class SumofDistancesLC2615 {
 
     // Time : O(N + (1 * (N + N))), Space: O(N)
     public long[] distance(int[] nums) {
