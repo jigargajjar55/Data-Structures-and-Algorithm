@@ -1,4 +1,3 @@
-package Arrays;
 
 //Time: O(N * M), Space: O(1)
 public class WherewillTheBallFall {
