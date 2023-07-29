@@ -24,6 +24,28 @@ public class StoneGameLC877 {
         return ans;
     }
 
+
+    private int solveByRecursion1(int left, int right, int[] piles){
+
+        //Base Case
+        if(left > right){
+            return 0;
+        }        
+
+        int takeFirst = piles[left] + Math.min(solveByRecursion1(left+1,right-1, piles),
+                                            solveByRecursion1(left+2,right, piles));
+
+        int takeLast = piles[right] + Math.min(solveByRecursion1(left+1,right-1, piles),
+                                            solveByRecursion1(left,right-2, piles));
+
+        int ans = Math.max(takeFirst, takeLast);
+
+        return ans;
+    }
+
+
+    
+
     // Time: O(N * N), Space: O(N + (N * N)) {Aux. stack space and 2D DP, N : Array
     // length}
     private int solveByTopDownDP(int left, int right, boolean turn, int[] piles, int[][] dp) {

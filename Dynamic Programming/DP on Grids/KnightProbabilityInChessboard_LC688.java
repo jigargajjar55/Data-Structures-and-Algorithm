@@ -20,12 +20,10 @@ public class KnightProbabilityInChessboard_LC688 {
             int nRow = row + del[i][0];
             int nCol = col + del[i][1];
 
-            ans += solveByRecursion(nRow,nCol,k-1,n,del);
+            ans += solveByRecursion(nRow,nCol,k-1,n,del)/8;
         }
 
-        double result = ans / 8;
-
-        return result;
+        return ans;
     }
 
     //Time: O((N * M * K), Space: O(N + N + (N * N * K)){Aux. Stack Space and 3D DP Array}
@@ -50,12 +48,10 @@ public class KnightProbabilityInChessboard_LC688 {
             int nRow = row + del[i][0];
             int nCol = col + del[i][1];
 
-            ans += solveByTopDownDP(nRow,nCol,k-1,n,del,dp);
+            ans += solveByTopDownDP(nRow,nCol,k-1,n,del,dp)/8;
         }
 
-        double result = ans / 8;
-
-        return dp[row][col][k] = result;
+        return dp[row][col][k] = ans;
     }
 
     public double knightProbability(int n, int k, int row, int column) {

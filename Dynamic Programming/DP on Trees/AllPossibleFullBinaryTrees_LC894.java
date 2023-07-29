@@ -32,14 +32,12 @@ public class AllPossibleFullBinaryTrees_LC894 {
 
         // create new list for all possible trees of size n.
         List<TreeNode> list = new ArrayList<>();
-        // start from left is 1 and go until left is less then n
-        int leftSize = 1;
-        int rightSize = n - leftSize - 1;
+        // start from left is 1 and go until left is less then n      
 
-        while(rightSize > 0){
+        for(int i=1; i<n; i+=2){
 
-            List<TreeNode> leftList = getAllFBT(leftSize,dp);
-            List<TreeNode> rightList = getAllFBT(rightSize,dp);
+            List<TreeNode> leftList = getAllFBT(i,dp);
+            List<TreeNode> rightList = getAllFBT(n-i-1,dp);
             // create each possible combination with left and right sub trees.
             for(TreeNode left : leftList){
                 for(TreeNode right : rightList){
@@ -51,13 +49,12 @@ public class AllPossibleFullBinaryTrees_LC894 {
                     list.add(curr);
                 }
             }
-            leftSize += 2;
-            rightSize -= 2;
         }
         // add all combinations in cache
         dp.put(n,list);
         return list;
     }
+    
     public List<TreeNode> allPossibleFBT(int n) {
 
         List<TreeNode> result = new ArrayList<>();
