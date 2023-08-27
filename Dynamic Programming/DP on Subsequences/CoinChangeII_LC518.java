@@ -1,4 +1,4 @@
-public class CoinChangeLC518 {
+public class CoinChangeII_LC518 {
 
     // Time: Exponential in nature, Space: ~ O(amount)
     private int solveByRecursion(int index, int amount, int[] coins) {

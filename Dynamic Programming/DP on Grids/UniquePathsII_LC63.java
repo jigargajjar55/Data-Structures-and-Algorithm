@@ -1,18 +1,18 @@
-class UniquePathsWithObstacles {
+class UniquePathsII_LC63 {
 
     // Time : O(2 ^ (m * n)), Space: O(path length) ~ O((m-1) + (n-1))
     private int solveByRecursion(int row, int col, int[][] grid, int mod) {
 
         // Base case
+        if (row < 0 || col < 0) {
+            return 0;
+        }
         if (row >= 0 && col >= 0 && grid[row][col] == 1) {
             return 0;
         }
         if (row == 0 && col == 0) {
             return 1;
-        }
-        if (row < 0 || col < 0) {
-            return 0;
-        }
+        }        
 
         int up = solveByRecursion(row - 1, col, grid, mod);
         int left = solveByRecursion(row, col - 1, grid, mod);
@@ -27,15 +27,15 @@ class UniquePathsWithObstacles {
     private int solveByTopDownDP(int row, int col, int[][] grid, int[][] dp) {
 
         // Base case
+        if (row < 0 || col < 0) {
+            return 0;
+        }
         if (row >= 0 && col >= 0 && grid[row][col] == 1) {
             return dp[row][col] = 0;
         }
         if (row == 0 && col == 0) {
             return dp[row][col] = 1;
-        }
-        if (row < 0 || col < 0) {
-            return 0;
-        }
+        }        
 
         // Overlapping Sub-Problem
         if (dp[row][col] != -1) {

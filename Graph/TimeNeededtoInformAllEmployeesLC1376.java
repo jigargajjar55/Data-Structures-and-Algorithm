@@ -11,7 +11,7 @@ class Pair {
     }
 }
 
-public class TimeNeededtoInformAllEmployeesLC1376 {
+class TimeNeededtoInformAllEmployeesLC1376 {
 
     private int bfs(int n, int headID, Map<Integer, List<Integer>> adj, int[] informTime) {
 
