@@ -6,12 +6,12 @@ public class UniquePathsInGrid {
     // Time : O(2 ^ (m * n)), Space: O(path length) = O((m-1) + (n-1))
     private static int solveByRecursion(int row, int col) {
         // Base Case
-        if (row == 0 && col == 0) {
-            return 1;
-        }
         if (row < 0 || col < 0) {
             return 0;
         }
+        if (row == 0 && col == 0) {
+            return 1;
+        }        
 
         int up = solveByRecursion(row - 1, col);
         int left = solveByRecursion(row, col - 1);
@@ -25,12 +25,14 @@ public class UniquePathsInGrid {
     // (n-1)){Recursive Call Stack Space}
     private static int solveByTopDownDP(int row, int col, int[][] dp) {
         // Base Case
-        if (row == 0 && col == 0) {
-            return dp[row][col] = 1;
-        }
         if (row < 0 || col < 0) {
             return 0;
         }
+        if (row == 0 && col == 0) {
+            return dp[row][col] = 1;
+        }
+        
+        //Overlapping sub-problem
         if (dp[row][col] != -1) {
             return dp[row][col];
         }
@@ -47,28 +49,27 @@ public class UniquePathsInGrid {
     private static int solveByBottomUpDP(int rows, int cols) {
         // Base Case
         int[][] dp = new int[rows][cols];
+        dp[0][0] = 1;
 
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
 
                 if (row == 0 && col == 0) {
-                    dp[row][col] = 1;
-                } else {
-                    int up = 0;
-                    int left = 0;
-
-                    if (row > 0) {
-                        up = dp[row - 1][col];
-                    }
-                    if (col > 0) {
-                        left = dp[row][col - 1];
-                    }
-                    dp[row][col] = up + left;
+                    continue;
                 }
-            }
 
+                int up = 0;
+                int left = 0;
+
+                if (row > 0) {
+                    up = dp[row - 1][col];
+                }
+                if (col > 0) {
+                    left = dp[row][col - 1];
+                }
+                dp[row][col] = up + left;                
+            }        
         }
-
         return dp[rows - 1][cols - 1];
     }
 
