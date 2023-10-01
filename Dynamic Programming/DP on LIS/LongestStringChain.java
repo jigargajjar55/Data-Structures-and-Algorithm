@@ -2,60 +2,67 @@ import java.util.*;
 
 public class LongestStringChain {
 
-    private boolean isPossible(String s1, String s2) {
+    //Time: O(Min(n,m))
+    private boolean isPossible(String s1, String s2){
 
-        if (s1.length() != s2.length() + 1) {
+        int n = s1.length();
+        int m = s2.length();
+
+        //If second string is not long exactly one letter
+        if(n + 1 != m){
             return false;
         }
 
-        int first = 0;
-        int second = 0;
+        int ptr1 = 0;
+        int ptr2 = 0;
 
-        while (first < s1.length()) {
-            if (second < s2.length() && s1.charAt(first) == s2.charAt(second)) {
-                first++;
-                second++;
-
-            } else {
-                first++;
+        while(ptr1 < n && ptr2 < m){
+            if(s1.charAt(ptr1) == s2.charAt(ptr2)){
+                ptr1++;
             }
+            ptr2++;
         }
 
-        if (first == s1.length() && second == s2.length()) {
+        if(ptr1 == n){
             return true;
-        } else {
+        }else{
             return false;
         }
 
     }
-
-    // Time : O( ((N ^ 2) * Length of Word) + (N * logN)), Space: O(N)
+    
+    // Time : O((N * logN) +  ((N ^ 2) * (Min(Length of selected 2 strings))))
+    // Space: O(N)
     public int longestStrChain(String[] words) {
 
-        int N = words.length;
+        int n = words.length;
+        //Sort words array based on word length
+        Arrays.sort(words, (w1,w2) -> Integer.compare(w1.length(), w2.length()));
 
-        Arrays.sort(words, (s1, s2) -> Integer.compare(s1.length(), s2.length()));
-
-        int[] dp = new int[N];
+        int[] dp = new int[n];
         Arrays.fill(dp, 1);
-        int maxi = 1;
 
-        for (int i = 0; i < N; i++) {
+        int maxChain = 0;
 
-            for (int prev = 0; prev < i; prev++) {
+        for(int curr = 0; curr < n; curr++){
 
-                if (isPossible(words[i], words[prev]) && dp[i] < 1 + dp[prev]) {
-                    dp[i] = 1 + dp[prev];
+            for(int prev = 0; prev < curr; prev++){
+
+                if(isPossible(words[prev], words[curr]) && (dp[curr] < 1 + dp[prev])){
+                    dp[curr] = 1 + dp[prev];
                 }
-
             }
 
-            if (maxi < dp[i]) {
-                maxi = dp[i];
+            if(maxChain < dp[curr]){
+                maxChain = dp[curr];
             }
         }
 
-        return maxi;
-
+        return maxChain;
+        
     }
+
+
+
+
 }
