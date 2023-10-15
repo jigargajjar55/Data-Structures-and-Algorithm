@@ -3,6 +3,8 @@ import java.util.*;
 public class MinimumNumberOfOperationstoMakeArrayContinuous_LC2009 {
     
 
+    // NeetCode explaination video:  https://www.youtube.com/watch?v=Dd-yJylrcOY
+
     //Bruteforce approach
     //Time: O((N * log N) + (N ^ 2))
     //Space: O(N)
