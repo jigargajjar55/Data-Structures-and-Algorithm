@@ -1,4 +1,4 @@
-class Solution {
+class FindLongestValidObstacleCourseatEachPositionLC1964 {
 
     // https://leetcode.com/problems/find-the-longest-valid-obstacle-course-at-each-position/solutions/3494494/image-explanation-step-by-step-explanation-easy-c-java-solutions-easy-to-understand/
 

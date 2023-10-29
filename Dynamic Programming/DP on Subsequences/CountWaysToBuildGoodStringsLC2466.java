@@ -1,4 +1,4 @@
-class Solution {
+class CountWaysToBuildGoodStringsLC2466 {
     private int getAddMod(int a, int b) {
         return (((a % 1_000_000_007) + (b % 1_000_000_007)) % 1_000_000_007);
     }

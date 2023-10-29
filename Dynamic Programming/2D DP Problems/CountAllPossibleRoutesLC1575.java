@@ -12,7 +12,7 @@ import java.util.*;
     Space complexity: O(Fuel + (N * Fuel)){Aux. Stack Space}
  */
 
-class Solution {
+class CountAllPossibleRoutesLC1575 {
     private int addMod(int a, int b) {
         return (((a % 1_000_000_007) + (b % 1_000_000_007)) % 1_000_000_007);
     }

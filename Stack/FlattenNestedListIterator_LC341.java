@@ -29,6 +29,7 @@ public class FlattenNestedListIterator_LC341 {
         int itr;
         int size;
 
+        //First we will flatten nested list, then we can call for next() and hasNext() call
         // Time: O(N){No. of elements}
         // Space: O(H){Aux. Stack space}
         private void getAllValues(List<Integer> list, List<NestedInteger> nestedList) {

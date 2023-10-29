@@ -37,7 +37,7 @@ public class ConstrainedSubsequenceSum_LC1425 {
     //Time: O(N)    
     //Space: O(N)
     //We use Sliding Window Maximum logic
-    public int constrainedSubsetSum(int[] nums, int k) {
+    public int constrainedSubsetSum2(int[] nums, int k) {
 
         int n = nums.length;
         int[] dp = new int[n];
@@ -68,4 +68,35 @@ public class ConstrainedSubsequenceSum_LC1425 {
         return result;
         
     }
+
+
+    //Time: O(N * log N)
+    //Space: O(N)
+    //Greedy Approach
+    public int constrainedSubsetSum3(int[] nums, int k) {
+
+        int n = nums.length;
+        PriorityQueue<int[]> pq = new PriorityQueue<>((p1,p2) -> Integer.compare(p2[0],p1[0]));
+        int maxi = nums[0];
+        pq.offer(new int[]{maxi, 0});        
+
+        for(int i=1; i<n; i++){
+
+
+            while(!pq.isEmpty() && (i - pq.peek()[1]) > k){
+                pq.poll();
+            }
+
+            int curr = Math.max(0, pq.peek()[0]) + nums[i];
+
+            if(curr > maxi){
+                maxi = curr;
+            }
+
+            pq.offer(new int[]{curr, i});
+        }
+
+        return maxi;        
+    }
+
 }

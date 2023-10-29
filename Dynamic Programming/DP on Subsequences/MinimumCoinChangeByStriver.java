@@ -1,4 +1,4 @@
-class Solution {
+class MinimumCoinChangeByStriver {
     // Time: Exponential in nature, Space: ~O(amount)
     private int solveByRecursion(int index, int amount, int[] coins) {
         // Base case

@@ -9,7 +9,6 @@ public class ValidateBinaryTreeNodes_LC1361 {
     //Space: O(2 * N){Size of Set and Queue}
 
 
-
     private int getRootForBinaryTree(int n,int[] leftChild,int[] rightChild){
 
         //We are taking set, add all nodes in set
@@ -79,7 +78,7 @@ public class ValidateBinaryTreeNodes_LC1361 {
             }
         }
 
-        //If set size is equal to N, it's valid binary tree.
+        //If set size is equal to N{Cover all nodes in binary tree while doing BFS}, it's valid binary tree.
         //Otherwise return false.
         return visited.size() == n;
         

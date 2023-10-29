@@ -1,4 +1,4 @@
-class Solution {
+class SolvingQuestionsWithBrainpowerLC2140 {
 
     // Time: Exponentail(2 ^ N), Space:O(N){Aux. Stack Space} N: array length
     private long solveByRecursion(int index, int n, int[][] questions) {
