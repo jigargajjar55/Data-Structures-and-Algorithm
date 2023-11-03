@@ -1,7 +1,7 @@
 
 import java.util.*;
 
-class Solution {
+class EvaluateDivisionLC399 {
     private Map<String, Map<String, Double>> makeGraph(List<List<String>> equations, double[] values) {
 
         Map<String, Map<String, Double>> adj = new HashMap<>();

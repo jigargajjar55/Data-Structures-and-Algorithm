@@ -1,18 +1,18 @@
 import java.util.*;
 
-class Pair {
-    int row;
-    int col;
-    int key;
-
-    Pair(int row, int col, int key) {
-        this.row = row;
-        this.col = col;
-        this.key = key;
-    }
-}
-
 public class ShortestPathtoGetAllKeysLC864 {
+
+    private class Pair {
+        int row;
+        int col;
+        int key;
+
+        Pair(int row, int col, int key) {
+            this.row = row;
+            this.col = col;
+            this.key = key;
+        }
+    }
 
     private boolean isSafe(int row, int col, int m, int n, String[] grid) {
         if ((row >= 0 && row < m) && (col >= 0 && col < n)) {

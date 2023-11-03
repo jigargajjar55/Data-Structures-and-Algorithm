@@ -1,16 +1,17 @@
 import java.util.*;
 
-class Pair {
-    int node;
-    double prob;
+class PathwithMaximumProbabilityLC1514 {
 
-    Pair(int node, double prob) {
-        this.node = node;
-        this.prob = prob;
+    private class Pair {
+        int node;
+        double prob;
+
+        Pair(int node, double prob) {
+            this.node = node;
+            this.prob = prob;
+        }
     }
-}
 
-class Solution {
     public double maxProbability(int n, int[][] edges, double[] succProb, int start, int end) {
         // Time: O(E * log N), Space: O(N + 2E)
         Map<Integer, List<Pair>> adj = new HashMap<>();

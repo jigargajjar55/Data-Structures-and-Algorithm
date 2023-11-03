@@ -1,17 +1,18 @@
 
 import java.util.*;
 
-class Pair {
-    int row;
-    int col;
+class ShortestBridgeLC934 {
 
-    Pair(int row, int col) {
-        this.row = row;
-        this.col = col;
+    private class Pair {
+        int row;
+        int col;
+
+        Pair(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
     }
-}
 
-class Solution {
     private boolean isSafe(int row, int col, int n) {
         if ((row >= 0 && row < n) && (col >= 0 && col < n)) {
             return true;

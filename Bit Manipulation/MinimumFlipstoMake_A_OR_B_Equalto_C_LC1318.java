@@ -1,4 +1,4 @@
-class Solution {
+class MinimumFlipstoMake_A_OR_B_Equalto_C_LC1318 {
     public int minFlips(int a, int b, int c) {
 
         int count = 0;

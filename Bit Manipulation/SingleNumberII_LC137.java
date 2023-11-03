@@ -1,4 +1,4 @@
-class Solution {
+class SingleNumberII_LC137 {
     public int singleNumber(int[] nums) {
 
         //Time: O(32 * N), Space: O(1)

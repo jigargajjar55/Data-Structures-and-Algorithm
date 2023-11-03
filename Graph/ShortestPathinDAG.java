@@ -2,7 +2,7 @@
 import java.util.*;
 
 //User function Template for Java
-class Solution {
+ class ShortestPathinDAG {
 
     private void topoSort(int node, Map<Integer, List<int[]>> adj, boolean[] visited, Stack<Integer> st) {
 
@@ -146,7 +146,7 @@ class GraphDAG {
 
 }
 
-public class ShortestPathinDAG {
+ class ShortestPathinDAG2 {
 
     public static void main(String[] args) {
         GraphDAG g = new GraphDAG();

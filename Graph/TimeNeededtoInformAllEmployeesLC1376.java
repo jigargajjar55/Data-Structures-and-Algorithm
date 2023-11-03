@@ -1,17 +1,17 @@
 
 import java.util.*;
 
-class Pair {
-    int node;
-    int time;
-
-    Pair(int node, int time) {
-        this.node = node;
-        this.time = time;
-    }
-}
-
 class TimeNeededtoInformAllEmployeesLC1376 {
+
+    private class Pair {
+        int node;
+        int time;
+
+        Pair(int node, int time) {
+            this.node = node;
+            this.time = time;
+        }
+    }
 
     private int bfs(int n, int headID, Map<Integer, List<Integer>> adj, int[] informTime) {
 

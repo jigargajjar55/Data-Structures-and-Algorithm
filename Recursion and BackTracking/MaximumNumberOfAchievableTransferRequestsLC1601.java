@@ -1,4 +1,4 @@
-class Solution {
+class MaximumNumberOfAchievableTransferRequestsLC1601 {
     private boolean isNetChangeZero(int n, int[] transeferWindow) {
         boolean isCheck = true;
         for (int i = 0; i < n; i++) {
