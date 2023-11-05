@@ -1,27 +1,27 @@
 import java.util.*;
 
-class Item {
-    int value, weight;
-
-    Item(int x, int y) {
-        this.value = x;
-        this.weight = y;
-    }
-}
-
-class Tuple {
-    int value;
-    int weight;
-    double perUnit;
-
-    Tuple(int value, int weight, double perUnit) {
-        this.value = value;
-        this.weight = weight;
-        this.perUnit = perUnit;
-    }
-}
-
 public class FractionalKnapsack {
+
+    private class Item {
+        int value, weight;
+
+        Item(int x, int y) {
+            this.value = x;
+            this.weight = y;
+        }
+    }
+
+    private class Tuple {
+        int value;
+        int weight;
+        double perUnit;
+
+        Tuple(int value, int weight, double perUnit) {
+            this.value = value;
+            this.weight = weight;
+            this.perUnit = perUnit;
+        }
+    }
 
     // Time : O( N + (N * log(N) + N)), Space : O(N)
     // Function to get the maximum total value in the knapsack.

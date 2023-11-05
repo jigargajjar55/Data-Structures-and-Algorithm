@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Solution {
+class GroupThePeopleGivenTheGroupSizeTheyBelongTo_LC1282 {
     //Time: O(N + (N * log N) + N), Space: O(N)
     public List<List<Integer>> groupThePeople(int[] groupSizes) {
 

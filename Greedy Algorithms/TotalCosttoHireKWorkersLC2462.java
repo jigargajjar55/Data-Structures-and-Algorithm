@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Solution {
+class TotalCosttoHireKWorkersLC2462 {
 
     // Time: O((candidates + K) * log (candidates)) , Space: O(candidates)
     public long totalCost(int[] costs, int k, int candidates) {

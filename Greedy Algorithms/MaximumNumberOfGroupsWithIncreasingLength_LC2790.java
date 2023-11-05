@@ -17,7 +17,7 @@ Explanation
     If x < k + 1, we need to wait more element to come in.
  */
 
-class Solution {
+class MaximumNumberOfGroupsWithIncreasingLength_LC2790 {
     public int maxIncreasingGroups(List<Integer> usageLimits) {
 
         Collections.sort(usageLimits);

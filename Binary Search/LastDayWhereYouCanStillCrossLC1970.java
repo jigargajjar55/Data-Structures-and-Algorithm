@@ -1,14 +1,16 @@
-class Pair {
-    int row;
-    int col;
 
-    Pair(int row, int col) {
-        this.row = row;
-        this.col = col;
+class LastDayWhereYouCanStillCrossLC1970 {
+
+    private class Pair {
+        int row;
+        int col;
+
+        Pair(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
     }
-}
 
-class Solution {
     private boolean isSafe(int row, int col, int[][] matrix, boolean[][] visited) {
         if ((row >= 0 && row < matrix.length) && (col >= 0 && col < matrix[0].length) && matrix[row][col] == 0
                 && !visited[row][col]) {

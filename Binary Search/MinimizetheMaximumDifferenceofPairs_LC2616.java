@@ -1,5 +1,7 @@
 import java.util.*;
-class Solution {
+
+class MinimizetheMaximumDifferenceofPairs_LC2616 {
+    
     //Time: O((N * log N) + (N * log(max Diff in nums Array)), Space: O(1)
     private boolean isPossible(int mid,int[] nums,int p){
         int pair = 0;
