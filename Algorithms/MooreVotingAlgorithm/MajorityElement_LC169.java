@@ -1,3 +1,4 @@
+package Algorithms.MooreVotingAlgorithm;
 public class MajorityElement_LC169 {
 
     //Time: O(2 * N)

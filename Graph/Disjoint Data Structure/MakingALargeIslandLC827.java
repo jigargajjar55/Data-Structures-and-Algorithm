@@ -1,47 +1,48 @@
 import java.util.*;
 
-class DisjointSet {
-    int[] parent;
-    public int[] size;
+class MakingALargeIslandLC827 {
 
-    DisjointSet(int n) {
-        parent = new int[n];
-        size = new int[n];
-        for (int i = 0; i < n; i++) {
-            parent[i] = i;
-            size[i] = 1;
+    private class DisjointSet {
+        int[] parent;
+        public int[] size;
+
+        DisjointSet(int n) {
+            parent = new int[n];
+            size = new int[n];
+            for (int i = 0; i < n; i++) {
+                parent[i] = i;
+                size[i] = 1;
+            }
+        }
+
+        public int findParent(int node) {
+            if (node == parent[node]) {
+                return node;
+            }
+
+            parent[node] = findParent(parent[node]);
+
+            return parent[node];
+        }
+
+        public void unionBySize(int u, int v) {
+            int ulp_u = findParent(u);
+            int ulp_v = findParent(v);
+
+            if (ulp_u == ulp_v) {
+                return;
+            }
+
+            if (size[ulp_u] < size[ulp_v]) {
+                parent[ulp_u] = ulp_v;
+                size[ulp_v] += size[ulp_u];
+            } else {
+                parent[ulp_v] = ulp_u;
+                size[ulp_u] += size[ulp_v];
+            }
         }
     }
 
-    public int findParent(int node) {
-        if (node == parent[node]) {
-            return node;
-        }
-
-        parent[node] = findParent(parent[node]);
-
-        return parent[node];
-    }
-
-    public void unionBySize(int u, int v) {
-        int ulp_u = findParent(u);
-        int ulp_v = findParent(v);
-
-        if (ulp_u == ulp_v) {
-            return;
-        }
-
-        if (size[ulp_u] < size[ulp_v]) {
-            parent[ulp_u] = ulp_v;
-            size[ulp_v] += size[ulp_u];
-        } else {
-            parent[ulp_v] = ulp_u;
-            size[ulp_u] += size[ulp_v];
-        }
-    }
-}
-
-class Solution {
     private boolean isSafe(int row, int col, int n) {
         if ((row >= 0 && row < n) && (col >= 0 && col < n)) {
             return true;

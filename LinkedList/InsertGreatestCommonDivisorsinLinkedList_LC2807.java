@@ -37,9 +37,8 @@ class Solution {
             int gcdValue = getGCD(val1,val2);
             
             ListNode newNode = new ListNode(gcdValue);
-            prev.next = newNode;
-            prev = prev.next;
-            prev.next = curr;
+            prev.next = newNode;           
+            newNode.next = curr;
             
             prev = curr;
             curr = curr.next;

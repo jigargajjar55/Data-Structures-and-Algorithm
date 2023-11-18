@@ -80,7 +80,7 @@ class DisJointDS {
 
 }
 
-class Solution {
+class NumberOfOperationstoMakeNetworkConnectedLC1319 {
     public int makeConnected(int n, int[][] connections) {
 
         DisJointDS ds = new DisJointDS(n);

@@ -25,10 +25,12 @@ public class BinarySearchMain {
 	static int binarySearch(int arr[], int size, int key) {
 		
 		int start = 0;
-		int end = size - 1;
-		int mid = (start + ((end - start)/2));
+		int end = size - 1;		
 		
 		while(start <= end) {
+
+			int mid = (start + ((end - start)/2));
+
 			if(key == arr[mid]) {
 				return mid;
 			}
@@ -39,10 +41,9 @@ public class BinarySearchMain {
 				 
 			} else {	
 				
-				end = mid - 1;				
+				end = mid - 1;			
 				
-			} 
-			mid = (start + ((end - start)/2));
+			} 			
 		}
 		
 		return -1;
