@@ -1,4 +1,4 @@
-package Arrays;
+package MatrixAndGrid;
 
 import java.util.*;
 

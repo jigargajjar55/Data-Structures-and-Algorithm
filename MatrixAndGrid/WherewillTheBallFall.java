@@ -1,3 +1,4 @@
+package MatrixAndGrid;
 
 //Time: O(N * M), Space: O(1)
 public class WherewillTheBallFall {
