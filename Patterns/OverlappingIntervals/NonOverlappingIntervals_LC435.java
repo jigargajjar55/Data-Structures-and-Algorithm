@@ -1,4 +1,5 @@
-package GreedyApproach;
+package Patterns.OverlappingIntervals;
+
 import java.util.*;
 public class NonOverlappingIntervals_LC435 {
   
