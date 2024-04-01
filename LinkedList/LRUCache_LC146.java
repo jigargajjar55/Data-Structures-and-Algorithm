@@ -1,20 +1,22 @@
 package LinkedList;
 import java.util.*;
 
-class ListNode{
-    int key;
-    int value;
-    ListNode next;
-    ListNode prev;
-    ListNode(int key, int value){
-        this.key = key;
-        this.value = value;
-        this.next = null;
-        this.prev = null;
-    }    
-}
+
 
 public class LRUCache_LC146 {
+
+    private class ListNode{
+        int key;
+        int value;
+        ListNode next;
+        ListNode prev;
+        ListNode(int key, int value){
+            this.key = key;
+            this.value = value;
+            this.next = null;
+            this.prev = null;
+        }    
+    }
 
     
     ListNode head;
