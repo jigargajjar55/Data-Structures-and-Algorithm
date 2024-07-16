@@ -14,7 +14,7 @@ class Pair32 {
 public class ShortestPathInUndirectedWeightedGraph {
 
     // Dijkstra's Algorithm : Time: O(E * log(N)) + O(N) Space: O(N)
-    public static List<Integer> shortestPath(int n, int m, int edges[][]) {
+    public List<Integer> shortestPath(int n, int m, int edges[][]) {
 
         Map<Integer, List<int[]>> adj = new HashMap<>();
         for (int i = 0; i < edges.length; i++) {
@@ -37,7 +37,7 @@ public class ShortestPathInUndirectedWeightedGraph {
         int[] distance = new int[n + 1];
         int[] parent = new int[n + 1];
         for (int i = 1; i <= n; i++) {
-            parent[i] = i;
+            parent[i] = -1;
             distance[i] = (int) (1e9);
         }
         PriorityQueue<Pair32> pq = new PriorityQueue<>((p1, p2) -> Integer.compare(p1.dist, p2.dist));
@@ -76,14 +76,15 @@ public class ShortestPathInUndirectedWeightedGraph {
         }
 
         int node = n;
-        while (parent[node] != node) {
+        while (node != -1) {
             result.add(node);
             node = parent[node];
         }
-        result.add(1);
+        result.add(distance[n]);
 
         Collections.reverse(result);
 
         return result;
     }
+
 }
