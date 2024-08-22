@@ -2,6 +2,8 @@ package Algorithms.SortingAlgorithms;
 
 import java.util.Arrays;
 
+//Time: O(N * log N)
+//Space: O(N)
 public class MergeSortRecursion {
 
 	public static void main(String[] args) {
@@ -10,70 +12,68 @@ public class MergeSortRecursion {
 		int n = arr.length;
 
 		System.out.println(Arrays.toString(arr));
-		mergeSort(arr, 0, n - 1);
-		System.out.println(Arrays.toString(arr));
+		int[] ans = mergeSort(arr, 0, n - 1);
+		System.out.println(Arrays.toString(ans));
 	}
 
-	public static void mergeSort(int[] arr, int start, int end) {
 
-		// base condition
-		if (start >= end) {
-			return;
-		}
+	private int[] merge(int[] first, int[] second){
 
-		int mid = start + ((end - start) / 2);
+        int m = first.length;
+        int n = second.length;
+        int[] ans = new int[m + n];
 
-		// left part sort
-		mergeSort(arr, start, mid);
+        int ptr1 = 0;
+        int ptr2 = 0;
+        int index = 0;
 
-		// right part sort
-		mergeSort(arr, mid + 1, end);
+        while(ptr1 < m && ptr2 < n){
 
-		// merge
-		merge(arr, start, end);
-	}
+            if(first[ptr1] < second[ptr2]){
+                ans[index] = first[ptr1];
+                index++;
+                ptr1++;
+            }else{
+                ans[index] = second[ptr2];
+                index++;
+                ptr2++;
+            }
+        }
 
-	public static void merge(int[] arr, int start, int end) {
-		int mid = start + ((end - start) / 2);
+        while(ptr1 < m){
+            ans[index] = first[ptr1];
+            index++;
+            ptr1++;
+        }
 
-		int len1 = mid - start + 1;
-		int len2 = end - mid;
+        while(ptr2 < n){
+            ans[index] = second[ptr2];
+            index++;
+            ptr2++;
+        }
 
-		int first[] = new int[len1];
-		int second[] = new int[len2];
+        return ans;
 
-		// copy values
-		int mainArrayIndex = start;
-		for (int i = 0; i < len1; i++) {
-			first[i] = arr[mainArrayIndex++];
-		}
-		mainArrayIndex = mid + 1;
-		for (int i = 0; i < len2; i++) {
-			second[i] = arr[mainArrayIndex++];
-		}
+    }
+    
+	private int[] mergeSort(int[] nums,int start,int end){
 
-		// merge 2 sorted arrays
-		int index1 = 0;
-		int index2 = 0;
-		mainArrayIndex = start;
+        //Base Case
+        if(start > end){
+            return new int[0];
+        }
+        if(start == end){
+            return new int[]{nums[start]};
+        }
 
-		while ((index1 < len1) && (index2 < len2)) {
 
-			if (first[index1] < second[index2]) {
-				arr[mainArrayIndex++] = first[index1++];
-			} else {
-				arr[mainArrayIndex++] = second[index2++];
-			}
-		}
+        int mid = start + ((end - start)/2);
+        int[] leftArr = mergeSort(nums, start, mid);
+        int[] rightArr = mergeSort(nums, mid + 1, end);
 
-		while (index1 < len1) {
-			arr[mainArrayIndex++] = first[index1++];
-		}
+        int[] ans = merge(leftArr, rightArr);
 
-		while (index2 < len2) {
-			arr[mainArrayIndex++] = second[index2++];
-		}
+        return ans;
 
-	}
-
+    }
 }
