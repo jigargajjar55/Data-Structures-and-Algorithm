@@ -1,7 +1,7 @@
 package DynamicProgramming.MinMax;
 import java.util.*;
 
-public class StoneGame3LC1406 {
+public class StoneGame3_LC1406 {
 
     // https://leetcode.com/problems/stone-game-iii/solutions/564896/java-2-solutions-minimax-bottom-up-dp-clean-code-o-n/
     // https://leetcode.com/problems/stone-game-iii/solutions/564266/c-python-easy-and-concise-solution-with-minimax-algorithm/

@@ -1,7 +1,7 @@
 package DynamicProgramming.MinMax;
 import java.util.*;
 
-public class StoneGame2LC1140 {
+public class StoneGame2_LC1140 {
 
     // Time: O(Exponential), Space:(N){Aux. stack space}
     private int solveByRecursion(int index, int m, int isAlex, int n, int[] piles) {

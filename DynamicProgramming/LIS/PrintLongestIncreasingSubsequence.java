@@ -29,7 +29,6 @@ public class PrintLongestIncreasingSubsequence {
         }
 
         result.add(arr[lastIndex]);
-        int ind = 0;
 
         while (hash[lastIndex] != lastIndex) {
             lastIndex = hash[lastIndex];

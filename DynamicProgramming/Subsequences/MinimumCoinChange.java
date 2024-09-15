@@ -4,7 +4,7 @@ import java.util.*;
 class MinimumCoinChange {
 
     // Time: Exponential in nature,
-    private int solveByRecursion(int index, int amount, int[] coins) {
+    private int solveByRecursion( int amount, int[] coins) {
         // Base case
         if (amount == 0) {
             return 0;
@@ -15,7 +15,7 @@ class MinimumCoinChange {
 
         int mini = (int) (1e9);
         for (int i = 0; i < coins.length; i++) {
-            int ans = solveByRecursion(index - 1, amount - coins[i], coins);
+            int ans = solveByRecursion(amount - coins[i], coins);
 
             if (ans != (int) (1e9)) {
                 mini = Math.min(mini, ans + 1);
@@ -26,7 +26,7 @@ class MinimumCoinChange {
 
     // Time: O(N * amount), Space: O(amount) + O(amount){Recursive Stack space and
     // DP Array}
-    private int solveByTopDownDP(int index, int amount, int[] coins, int[] dp) {
+    private int solveByTopDownDP(int amount, int[] coins, int[] dp) {
         // Base case
         if (amount == 0) {
             return 0;
@@ -42,7 +42,7 @@ class MinimumCoinChange {
 
         int mini = (int) (1e9);
         for (int i = 0; i < coins.length; i++) {
-            int ans = solveByTopDownDP(index - 1, amount - coins[i], coins, dp);
+            int ans = solveByTopDownDP(amount - coins[i], coins, dp);
 
             if (ans != (int) (1e9)) {
                 mini = Math.min(mini, ans + 1);
