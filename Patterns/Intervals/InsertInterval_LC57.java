@@ -1,4 +1,4 @@
-package Patterns.OverlappingIntervals;
+package Patterns.Intervals;
 
 import java.util.*;
 

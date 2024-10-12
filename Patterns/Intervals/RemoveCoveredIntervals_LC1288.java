@@ -1,4 +1,4 @@
-package Patterns.OverlappingIntervals;
+package Patterns.Intervals;
 
 public class RemoveCoveredIntervals_LC1288 {
 
