@@ -1,24 +1,23 @@
-package DynamicProgramming.Subsequences;
-public class CoinChangeII_LC518 {
-
-    // Time: Exponential in nature, Space: ~ O(amount)
+package DynamicProgramming.TwoDimensional;
+class MinimumCoinChangeByStriver {
+    // Time: Exponential in nature, Space: ~O(amount)
     private int solveByRecursion(int index, int amount, int[] coins) {
         // Base case
         if (index == 0) {
             if ((amount % coins[index]) == 0) {
-                return 1;
+                return (amount / coins[index]);
             } else {
-                return 0;
+                return (int) (1e9);
             }
         }
 
         int exclude = solveByRecursion(index - 1, amount, coins);
-        int include = 0;
+        int include = (int) (1e9);
 
         if (coins[index] <= amount) {
-            include = solveByRecursion(index, amount - coins[index], coins);
+            include = 1 + solveByRecursion(index, amount - coins[index], coins);
         }
-        int ans = exclude + include;
+        int ans = Math.min(exclude, include);
 
         return ans;
     }
@@ -28,9 +27,9 @@ public class CoinChangeII_LC518 {
         // Base case
         if (index == 0) {
             if ((amount % coins[index]) == 0) {
-                return dp[index][amount] = 1;
+                return (amount / coins[index]);
             } else {
-                return dp[index][amount] = 0;
+                return (int) (1e9);
             }
         }
 
@@ -40,12 +39,12 @@ public class CoinChangeII_LC518 {
         }
 
         int exclude = solveByTopDownDP(index - 1, amount, coins, dp);
-        int include = 0;
+        int include = (int) (1e9);
 
         if (coins[index] <= amount) {
-            include = solveByTopDownDP(index, amount - coins[index], coins, dp);
+            include = 1 + solveByTopDownDP(index, amount - coins[index], coins, dp);
         }
-        dp[index][amount] = exclude + include;
+        dp[index][amount] = Math.min(exclude, include);
 
         return dp[index][amount];
     }
@@ -58,9 +57,9 @@ public class CoinChangeII_LC518 {
         // Analyse Base case
         for (int i = 0; i <= amount; i++) {
             if ((i % coins[0]) == 0) {
-                dp[0][i] = 1;
+                dp[0][i] = (i / coins[0]);
             } else {
-                dp[0][i] = 0;
+                dp[0][i] = (int) (1e9);
             }
         }
 
@@ -69,18 +68,21 @@ public class CoinChangeII_LC518 {
             for (int target = 0; target <= amount; target++) {
 
                 int exclude = dp[index - 1][target];
-                int include = 0;
+                int include = (int) (1e9);
 
                 if (coins[index] <= target) {
-                    include = dp[index][target - coins[index]];
+                    include = 1 + dp[index][target - coins[index]];
                 }
-                dp[index][target] = exclude + include;
+                dp[index][target] = Math.min(exclude, include);
 
             }
         }
 
-        return dp[n - 1][amount];
-
+        if (dp[n - 1][amount] == (int) (1e9)) {
+            return -1;
+        } else {
+            return dp[n - 1][amount];
+        }
     }
 
     // Time: O(N * amount), Space: O(2 * amount)
@@ -91,9 +93,9 @@ public class CoinChangeII_LC518 {
         // Analyse Base case
         for (int i = 0; i <= amount; i++) {
             if ((i % coins[0]) == 0) {
-                prev[i] = 1;
+                prev[i] = (i / coins[0]);
             } else {
-                prev[i] = 0;
+                prev[i] = (int) (1e9);
             }
         }
 
@@ -103,36 +105,48 @@ public class CoinChangeII_LC518 {
             for (int target = 0; target <= amount; target++) {
 
                 int exclude = prev[target];
-                int include = 0;
+                int include = (int) (1e9);
 
                 if (coins[index] <= target) {
-                    include = curr[target - coins[index]];
+                    include = 1 + curr[target - coins[index]];
                 }
-                curr[target] = exclude + include;
+                curr[target] = Math.min(exclude, include);
 
             }
             prev = curr;
         }
 
-        return prev[amount];
-
+        if (prev[amount] == (int) (1e9)) {
+            return -1;
+        } else {
+            return prev[amount];
+        }
     }
 
-    public int change(int amount, int[] coins) {
-
+    public int coinChange(int[] coins, int amount) {
         int n = coins.length;
-        // return solveByRecursion(n-1,amount,coins);
+
+        // int ans = solveByRecursion(n-1,amount,coins);
+        // if(ans >= (int)(1e9)){
+        // return -1;
+        // }else{
+        // return ans;
+        // }
 
         // int[][] dp = new int[n][amount+1];
         // for(int[] row : dp){
         // Arrays.fill(row,-1);
         // }
-        // return solveByTopDownDP(n-1,amount,coins,dp);
+        // int ans = solveByTopDownDP(n-1,amount,coins,dp);
+        // if(ans >= (int)(1e9)){
+        // return -1;
+        // }else{
+        // return ans;
+        // }
 
         // return solveByBottomUpDP(n,amount,coins);
 
         return solveBySpaceOptimise(n, amount, coins);
 
     }
-
 }

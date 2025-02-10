@@ -1,14 +1,14 @@
+package Tree.BinaryTree;
 import java.util.*;
-
-
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-}
  
 public class AllNodesDistanceKinBinaryTree_LC863 {
+
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
     
    
     private void getAllParentMapping(TreeNode root, Map<TreeNode,TreeNode> nodeToParent){

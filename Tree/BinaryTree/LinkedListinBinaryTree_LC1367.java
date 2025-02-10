@@ -1,4 +1,4 @@
-package Tree.Binary;
+package Tree.BinaryTree;
 
 public class LinkedListinBinaryTree_LC1367 {
 

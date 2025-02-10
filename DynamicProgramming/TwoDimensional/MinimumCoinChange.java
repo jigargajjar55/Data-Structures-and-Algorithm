@@ -1,4 +1,4 @@
-package DynamicProgramming.Subsequences;
+package DynamicProgramming.TwoDimensional;
 import java.util.*;
 
 class MinimumCoinChange {

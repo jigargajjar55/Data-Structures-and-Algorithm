@@ -1,4 +1,4 @@
-package Tree.Binary Tree;
+package Tree.BinaryTree;
 
 public class BinaryTreetoDLL {
 

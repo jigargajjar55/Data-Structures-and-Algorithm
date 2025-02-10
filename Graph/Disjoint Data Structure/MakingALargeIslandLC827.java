@@ -2,20 +2,25 @@ import java.util.*;
 
 class MakingALargeIslandLC827 {
 
-    private class DisjointSet {
+    private class DisJointSet {
         int[] parent;
-        public int[] size;
+        int[] size;
+        int noOfNodes;
 
-        DisjointSet(int n) {
-            parent = new int[n];
-            size = new int[n];
-            for (int i = 0; i < n; i++) {
-                parent[i] = i;
-                size[i] = 1;
+        DisJointSet(int noOfNodes) {
+            this.noOfNodes = noOfNodes;
+            this.parent = new int[noOfNodes];
+            this.size = new int[noOfNodes];
+
+            for (int i = 0; i < noOfNodes; i++) {
+                this.parent[i] = i;
+                this.size[i] = 1;
             }
         }
 
         public int findParent(int node) {
+
+            // Base Case
             if (node == parent[node]) {
                 return node;
             }
@@ -25,7 +30,7 @@ class MakingALargeIslandLC827 {
             return parent[node];
         }
 
-        public void unionBySize(int u, int v) {
+        public void unionBysize(int u, int v) {
             int ulp_u = findParent(u);
             int ulp_v = findParent(v);
 
@@ -33,35 +38,42 @@ class MakingALargeIslandLC827 {
                 return;
             }
 
-            if (size[ulp_u] < size[ulp_v]) {
-                parent[ulp_u] = ulp_v;
-                size[ulp_v] += size[ulp_u];
-            } else {
-                parent[ulp_v] = ulp_u;
+            if (size[ulp_u] > size[ulp_v]) {
                 size[ulp_u] += size[ulp_v];
+                parent[ulp_v] = ulp_u;
+            } else {
+                size[ulp_v] += size[ulp_u];
+                parent[ulp_u] = ulp_v;
             }
         }
-    }
 
-    private boolean isSafe(int row, int col, int n) {
-        if ((row >= 0 && row < n) && (col >= 0 && col < n)) {
-            return true;
-        } else {
-            return false;
+        public int getSize(int node) {
+            return size[node];
         }
+
     }
 
+    private boolean isSafe(int row, int col, int m, int n, int[][] grid) {
+
+        if ((row >= 0 && row < m) && (col >= 0 && col < n) && (grid[row][col] == 1)) {
+            return true;
+        }
+        return false;
+
+    }
+
+    // Time: O((M * N * 4 * (4a)))
+    // Space: O(M * N)
     public int largestIsland(int[][] grid) {
 
-        int maxSize = 0;
-        int n = grid.length;
+        int m = grid.length;
+        int n = grid[0].length;
+        DisJointSet ds = new DisJointSet(m * n);
 
-        DisjointSet ds = new DisjointSet(n * n);
-        int[] delRow = { -1, 0, 1, 0 };
-        int[] delCol = { 0, 1, 0, -1 };
+        int[][] dirs = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
 
-        // Step1
-        for (int row = 0; row < n; row++) {
+        // Step1: connect all island which exist
+        for (int row = 0; row < m; row++) {
             for (int col = 0; col < n; col++) {
 
                 if (grid[row][col] == 0) {
@@ -70,61 +82,70 @@ class MakingALargeIslandLC827 {
 
                 int node = (n * row) + col;
 
-                for (int ind = 0; ind < 4; ind++) {
-                    int adjRow = row + delRow[ind];
-                    int adjCol = col + delCol[ind];
+                for (int[] dir : dirs) {
+                    int nRow = row + dir[0];
+                    int nCol = col + dir[1];
 
-                    if (isSafe(adjRow, adjCol, n) && grid[adjRow][adjCol] == 1) {
-                        int adjNode = (n * adjRow) + adjCol;
+                    if (isSafe(nRow, nCol, m, n, grid)) {
+                        int adjNode = (n * nRow) + nCol;
 
-                        ds.unionBySize(node, adjNode);
+                        ds.unionBysize(node, adjNode);
                     }
                 }
 
             }
         }
 
-        // Step2
-        for (int row = 0; row < n; row++) {
+        int result = 0;
+
+        // Step2: Change 0 to 1 for each 0 cell and check for largest island
+        for (int row = 0; row < m; row++) {
             for (int col = 0; col < n; col++) {
 
+                int node = (n * row) + col;
+
+                // For edges case -- safe check
                 if (grid[row][col] == 1) {
+
+                    int ulp_Node = ds.findParent(node);
+
+                    int currSize = ds.getSize(ulp_Node);
+
+                    if (result < currSize) {
+                        result = currSize;
+                    }
+
                     continue;
                 }
 
-                int node = (n * row) + col;
                 Set<Integer> set = new HashSet<>();
 
-                for (int ind = 0; ind < 4; ind++) {
-                    int adjRow = row + delRow[ind];
-                    int adjCol = col + delCol[ind];
+                for (int[] dir : dirs) {
+                    int nRow = row + dir[0];
+                    int nCol = col + dir[1];
 
-                    if (isSafe(adjRow, adjCol, n)) {
-                        if (grid[adjRow][adjCol] == 1) {
-                            int adjNode = (n * adjRow) + adjCol;
-                            int ulp_A = ds.findParent(adjNode);
+                    if (isSafe(nRow, nCol, m, n, grid)) {
+                        int adjNode = (n * nRow) + nCol;
 
-                            set.add(ulp_A);
-                        }
+                        int ulp_adjNode = ds.findParent(adjNode);
+                        set.add(ulp_adjNode);
                     }
                 }
 
-                int temp = 1;
-                for (int nd : set) {
-                    temp += ds.size[nd];
+                int currSize = 1;
+                for (int currNode : set) {
+                    currSize += ds.getSize(currNode);
                 }
-                maxSize = Math.max(maxSize, temp);
+
+                if (result < currSize) {
+                    result = currSize;
+                }
+
             }
         }
 
-        // For edges case -- safe check
-        for (int node = 0; node < (n * n); node++) {
-            int ulp_A = ds.findParent(node);
-
-            maxSize = Math.max(maxSize, ds.size[ulp_A]);
-        }
-
-        return maxSize;
+        return result;
 
     }
+
 }

@@ -1,3 +1,4 @@
+package Tree.BinaryTree;
 import java.util.*;
 
 public class BinaryTreesWithFactors_LC823 {
