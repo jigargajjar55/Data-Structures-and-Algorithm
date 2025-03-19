@@ -25,14 +25,10 @@ public class LongestSubarraywithgivenSumK {
        long sum = 0;
        int maxLen = 0;
        Map<Long, Integer> prefixSum = new HashMap<>();
+       prefixSum.put(0, -1);
 
        for(int index=0; index<n; index++){
            sum += a[index];
-
-           if(sum == k){
-               maxLen = index + 1;
-           }
-
            long remainingSum = sum - k;
 
            if(prefixSum.containsKey(remainingSum)){
