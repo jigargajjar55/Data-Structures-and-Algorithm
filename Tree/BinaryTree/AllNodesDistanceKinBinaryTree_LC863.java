@@ -94,4 +94,70 @@ public class AllNodesDistanceKinBinaryTree_LC863 {
 
         return result;
     }
+
+    //Time: O(N + N)
+    //Space: O(Height of Tree)
+    private int dfs(TreeNode root, TreeNode target, int k, int depth, List<Integer> result){
+
+        //Base Case
+        if(root == null){
+            return 0;
+        }
+
+        if(depth == k){
+            result.add(root.val);
+            return 0;
+        }
+
+        int left = 0, right = 0;
+        if(root.val == target.val || depth > 0){
+            left = dfs(root.left,target,k, depth+1, result);
+            right = dfs(root.right,target,k, depth+1,result);
+        }else{
+            left = dfs(root.left,target,k, depth, result);
+            right = dfs(root.right,target,k, depth,result);
+        }
+
+        if(root.val == target.val){
+            return 1;
+        }
+
+        if(left == k || right == k){
+            result.add(root.val);
+            return 0;
+        }
+
+        if(left > 0){
+            dfs(root.right,target,k,left+1,result);
+            return left+1;
+        }
+
+        if(right > 0){
+            dfs(root.left,target,k,right+1,result);
+            return right+1;
+        }
+
+        return 0;
+
+    }
+
+    public List<Integer> distanceK1(TreeNode root, TreeNode target, int k) {
+        
+
+        List<Integer> result = new ArrayList<>();
+
+        if(k == 0){
+            result.add(target.val);
+        }else{
+            dfs(root,target,k, 0, result);
+        }
+        
+        return result;
+    }
+
+
+
+
+
+
 }
